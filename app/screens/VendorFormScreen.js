@@ -10,7 +10,8 @@ const VendorFormScreen = ({ navigation }) => {
   const { state, createVendor, clearErrorMessage } = useContext(VendorContext);
   
   const service = navigation.getParam('name');
-          
+  const vendor = navigation.getParam('vendor');
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -19,6 +20,7 @@ const VendorFormScreen = ({ navigation }) => {
           errorMessage={state.errorMessage}
           onSubmit={createVendor}
           serviceName={service}
+          vendor={vendor}
           submitButtonText="Create Vendor"
         />
       </View>

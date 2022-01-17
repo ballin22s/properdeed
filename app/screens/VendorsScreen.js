@@ -20,7 +20,7 @@ import { FontAwesome } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const VendorsScreen = () => {
+const VendorsScreen = ({ navigation }) => {
   const { state, fetchVendors, clearErrorMessage } = useContext(VendorContext);
   
   return (
@@ -31,6 +31,13 @@ const VendorsScreen = () => {
         {state.map(function(vendor, index){
           return (
             <View style={styles.vendor} key={index}>
+              <FontAwesome
+                onPress={() => navigation.navigate('VendorForm', { vendor: vendor })} key={index}            
+                name="edit"
+                size={20}
+                style={{ textAlign: "right", marginRight: 20 }}
+              />
+              
               <Text style={styles.company_name}>
                 {vendor.company_name}  
               </Text>

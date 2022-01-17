@@ -6,17 +6,17 @@ import Spacer from '../components/Spacer';
 
 import { withNavigation } from 'react-navigation';
 
-const VendorForm = ({ errorMessage, onSubmit, serviceName, submitButtonText, navigation }) => {
-  const [companyName, setCompanyName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [zip, setZip] = useState('');
-  const [city, setCity] = useState('');
+const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonText, navigation }) => {
+  const [companyName, setCompanyName] = useState(vendor ? vendor.company_name : '');
+  const [firstName, setFirstName] = useState(vendor ? vendor.first_name : '');
+  const [lastName, setLastName] = useState(vendor ? vendor.last_name : '');
+  const [phone, setPhone] = useState(vendor ? vendor.phone : '');
+  const [email, setEmail] = useState(vendor ? vendor.email : '');
+  const [zip, setZip] = useState(vendor ? vendor.vendor_addresses[0].zip : '');
+  const [city, setCity] = useState(vendor ? vendor.vendor_addresses[0].city : '');
     
   const [open1, setStateOpen] = useState(false);
-  const [stateValue, setValue] = useState(null);
+  const [stateValue, setValue] = useState(vendor ? vendor.vendor_addresses[0].state_id : null);
     
   const [usStates, setUsStates] = useState([
     { value: 2, label: "Alabama" },
