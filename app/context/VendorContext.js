@@ -11,6 +11,8 @@ const vendorReducer = (state, action) => {
       return action.payload;
     case 'createVendor':
       return { errorMessage: '', token: action.payload }
+    case 'updateVendor':
+      return { errorMessage: '', token: action.payload }
     default:
       return state;
   }
@@ -20,7 +22,7 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
 
-const createVendor = dispatch => async ({ companyName, firstName, lastName, phone, email, city, zip, stateValue, service }) => {
+const createVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, city, zip, stateValue, service }) => {
   const user = await AsyncStorage.getItem('user');
   const user_id = JSON.parse(user)[1][1];
   
@@ -36,17 +38,52 @@ const createVendor = dispatch => async ({ companyName, firstName, lastName, phon
           phone: phone,
           email: email, 
           all_services: service,
-          vendor_addresses_attributes: [{
+          vendor_address_attributes: {
             state_id: stateValue,
             zip: zip,
             city: city
-          }]
+          }
         } 
       } 
     );
     //await AsyncStorage.setItem('token', response.data.user.token);
     //dispatch({ type: 'login', payload: response.data.user.token });
     //navigate('Services');
+    console.log("success");
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with login'
+    });
+  }
+};
+
+const updateVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, city, zip, stateValue, service }) => {
+  const user = await AsyncStorage.getItem('user');
+  const user_id = JSON.parse(user)[1][1];
+  
+  try {
+    const response = await trackerApi.put(
+      `/vendors/${vendorID}`,
+      { 
+        vendor: {
+          user_id: user_id,
+          company_name: companyName,
+          first_name: firstName,
+          last_name: lastName,
+          phone: phone,
+          email: email, 
+          all_services: service,
+          vendor_address_attributes: {
+            state_id: stateValue,
+            zip: zip,
+            city: city
+          }
+        } 
+      } 
+    );
     console.log("success");
     console.log(response);
   } catch (err) {
@@ -71,6 +108,6 @@ const fetchStates = dispatch => async() => {
 
 export const { Provider, Context } = createDataContext(
   vendorReducer,
-  { fetchVendors, fetchStates, createVendor, clearErrorMessage },
+  { fetchVendors, fetchStates, createVendor, updateVendor, clearErrorMessage },
   []
 );

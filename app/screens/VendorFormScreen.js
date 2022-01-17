@@ -7,7 +7,7 @@ import { Context as VendorContext } from '../context/VendorContext';
 import VendorForm from '../components/VendorForm';
 
 const VendorFormScreen = ({ navigation }) => {
-  const { state, createVendor, clearErrorMessage } = useContext(VendorContext);
+  const { state, createVendor, updateVendor, clearErrorMessage } = useContext(VendorContext);
   
   const service = navigation.getParam('name');
   const vendor = navigation.getParam('vendor');
@@ -18,10 +18,10 @@ const VendorFormScreen = ({ navigation }) => {
         <NavigationEvents onWillFocus={ clearErrorMessage }/>
         <VendorForm
           errorMessage={state.errorMessage}
-          onSubmit={createVendor}
+          onSubmit={vendor ? updateVendor : createVendor}
           serviceName={service}
           vendor={vendor}
-          submitButtonText="Create Vendor"
+          submitButtonText={vendor ? "Update Vendor" : "Create Vendor"}
         />
       </View>
     </ScrollView>

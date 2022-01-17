@@ -22,7 +22,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const VendorsScreen = ({ navigation }) => {
   const { state, fetchVendors, clearErrorMessage } = useContext(VendorContext);
-  
+  console.log(state);
   return (
     <>
     <NavigationEvents onWillFocus={fetchVendors} />    
