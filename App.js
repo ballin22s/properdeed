@@ -1,21 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import Navigator from './app/routes/navigator'
+
+import { setNavigator } from './app/navigationRef';
+import { Provider as ServiceProvider } from './app/context/ServiceContext';
+
+import { Provider as VendorProvider } from './app/context/VendorContext';
+
+import { Provider as AuthProvider } from './app/context/AuthContext';
+
+//import { StyleSheet, Text, View } from 'react-native';
+
+export default () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ServiceProvider>
+      <VendorProvider>
+        <AuthProvider>
+          <Navigator
+            ref={(navigator) => {
+              setNavigator(navigator);
+            }}
+          />
+        </AuthProvider>
+      </VendorProvider>
+    </ServiceProvider>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
