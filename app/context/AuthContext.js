@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import createDataContext from './createDataContext';
 import trackerApi from '../api/tracker';
 import { navigate } from '../navigationRef';
@@ -82,7 +82,7 @@ const login = dispatch => async ({ email, password }) => {
 };
 
 const logout = dispatch => async () => {
-  await AsyncStorage.removeItem('token');
+  await AsyncStorage.removeItem('user');
   dispatch({ type: 'logout' });
   navigate('loginFlow');
 };

@@ -9,11 +9,14 @@ import {
   TouchableWithoutFeedback,
   ImageBackground 
 } from 'react-native';
+
 import { NavigationEvents, withNavigationFocus } from 'react-navigation';
 import { Context as ServiceContext } from '../context/ServiceContext';
 import { ListItem } from 'react-native-elements';
 
 import { Dimensions } from 'react-native';
+
+import { FontAwesome } from '@expo/vector-icons';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -46,9 +49,17 @@ const ServicesScreen = ({ navigation }) => {
   );
 };
 
-ServicesScreen.navigationOptions = {
-  title: 'Services'
-};
+ServicesScreen.navigationOptions = ({ navigation }) => ({
+  title: 'Services',
+  headerLeft: () => (
+    <FontAwesome
+      onPress={() => navigation.navigate('Logout')}
+      name="bars"
+      size={20}
+      style={{ marginLeft: 10 }}
+    />
+  ),
+});
 
 const styles = StyleSheet.create({
   container: {

@@ -31,7 +31,7 @@ const DeleteForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
     <>
       <Spacer>
         <TouchableOpacity
-          style={styles.button}
+          style={vendor ? styles.button : styles.hidden }
           onPress={() => deleteAlert(vendorID)}   
         >
           <Text style={styles.text}>Delete</Text>
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'red',
     padding: 10,
+  },
+  hidden: {
+    display: 'none',
   },
   text: {
     color: "white",

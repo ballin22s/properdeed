@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ResolveAuthScreen from '../screens/ResolveAuthScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
+import LogoutScreen from '../screens/LogoutScreen';
 
 import ServicesScreen from '../screens/ServicesScreen';
 import VendorsScreen from '../screens/VendorsScreen';
@@ -16,8 +17,9 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const appNavigation = createStackNavigator({
   Services: ServicesScreen,
+  Logout: LogoutScreen,
   Vendors: VendorsScreen,
-  VendorForm: VendorFormScreen,
+  VendorForm: VendorFormScreen  
 });
 
 appNavigation.navigationOptions = {
