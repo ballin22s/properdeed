@@ -14,11 +14,11 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
   const [lastName, setLastName] = useState(vendor ? vendor.last_name : '');
   const [phone, setPhone] = useState(vendor ? vendor.phone : '');
   const [email, setEmail] = useState(vendor ? vendor.email : '');
-  const [zip, setZip] = useState(vendor ? vendor.vendor_address.zip : '');
-  const [city, setCity] = useState(vendor ? vendor.vendor_address.city : '');
+  const [zip, setZip] = useState(vendor.vendor_address ? vendor.vendor_address.zip : '');
+  const [city, setCity] = useState(vendor.vendor_address ? vendor.vendor_address.city : '');
     
   const [open1, setStateOpen] = useState(false);
-  const [stateValue, setValue] = useState(vendor ? vendor.vendor_address.state_id : null);
+  const [stateValue, setValue] = useState(vendor.vendor_address ? vendor.vendor_address.state_id : null);
     
   const [usStates, setUsStates] = useState([
     { value: 2, label: "Alabama" },

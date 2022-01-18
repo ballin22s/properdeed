@@ -13,6 +13,8 @@ const vendorReducer = (state, action) => {
       return { errorMessage: '', token: action.payload }
     case 'updateVendor':
       return { errorMessage: '', token: action.payload }
+    case 'deleteVendor':
+      return { errorMessage: '', token: action.payload }
     default:
       return state;
   }
@@ -84,7 +86,28 @@ const updateVendor = dispatch => async ({ vendorID, companyName, firstName, last
       } 
     );
     
-    console.log(navigate);
+    console.log(response);
+    navigate('Vendors')
+
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with login'
+    });
+  }
+};
+
+const deleteVendor = dispatch => async ({ vendorID }) => {
+  const user = await AsyncStorage.getItem('user');
+  const user_id = JSON.parse(user)[1][1];
+
+  try {
+    const response = await trackerApi.delete(
+      `/vendors/${vendorID}`
+    );
+    
+    console.log(response);
     navigate('Vendors')
 
   } catch (err) {
@@ -109,6 +132,6 @@ const fetchStates = dispatch => async() => {
 
 export const { Provider, Context } = createDataContext(
   vendorReducer,
-  { fetchVendors, fetchStates, createVendor, updateVendor, clearErrorMessage },
+  { fetchVendors, fetchStates, createVendor, updateVendor, deleteVendor, clearErrorMessage },
   []
 );
