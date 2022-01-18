@@ -51,6 +51,7 @@ const createVendor = dispatch => async ({ vendorID, companyName, firstName, last
     //navigate('Services');
     console.log("success");
     console.log(response);
+    navigation.popToTop();
   } catch (err) {
     console.log(err);
     dispatch({
@@ -86,6 +87,8 @@ const updateVendor = dispatch => async ({ vendorID, companyName, firstName, last
     );
     console.log("success");
     console.log(response);
+    
+    navigation.popToTop();
   } catch (err) {
     console.log(err);
     dispatch({
