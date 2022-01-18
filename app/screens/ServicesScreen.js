@@ -33,7 +33,7 @@ const ServicesScreen = ({ navigation }) => {
               onPress={(name) => navigation.navigate('Vendors', { name: service.name })} key={index}
             >
             <View style={styles.service}>
-              <ImageBackground source={image} style={styles.image} imageStyle={{ borderRadius: 20 }}>
+              <ImageBackground style={styles.image} imageStyle={{ borderRadius: 20 }}>
                 <Text style={styles.text}>{service.name}</Text>
               </ImageBackground>
             </View>

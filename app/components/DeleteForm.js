@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Alert } from 'react-native';
-import { Text, Button, View } from 'react-native-elements';
+import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { Text, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 
 import { withNavigation } from 'react-navigation';
@@ -30,21 +30,26 @@ const DeleteForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
   return (
     <>
       <Spacer>
-        <Button 
-        title={submitButtonText}
-        onPress={() => deleteAlert(vendorID)}   
-        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => deleteAlert(vendorID)}   
+        >
+          <Text style={styles.text}>Delete</Text>
+        </TouchableOpacity>
       </Spacer>
     </>
   )
 }
 
 const styles = StyleSheet.create({
-  errorMessage: {
-    fontSize: 16,
-    color: 'red',
-    marginLeft: 10,
-    marginBottom: 5
+  button: {
+    alignItems: 'center',
+    backgroundColor: 'red',
+    padding: 10,
+  },
+  text: {
+    color: "white",
+    fontSize: 18,
   }
 });
 

@@ -35,7 +35,7 @@ const VendorsScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate('VendorForm', { vendor: vendor })} key={index}            
                 name="edit"
                 size={20}
-                style={{ textAlign: "right", marginRight: 20 }}
+                style={{ textAlign: "right", marginRight: 25 }}
               />
               
               <Text style={styles.company_name}>
