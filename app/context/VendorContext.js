@@ -46,12 +46,10 @@ const createVendor = dispatch => async ({ vendorID, companyName, firstName, last
         } 
       } 
     );
-    //await AsyncStorage.setItem('token', response.data.user.token);
-    //dispatch({ type: 'login', payload: response.data.user.token });
-    //navigate('Services');
-    console.log("success");
+
     console.log(response);
-    navigation.popToTop();
+    navigate('Vendors')
+
   } catch (err) {
     console.log(err);
     dispatch({
@@ -85,10 +83,10 @@ const updateVendor = dispatch => async ({ vendorID, companyName, firstName, last
         } 
       } 
     );
-    console.log("success");
-    console.log(response);
     
-    navigation.popToTop();
+    console.log(navigate);
+    navigate('Vendors')
+
   } catch (err) {
     console.log(err);
     dispatch({
