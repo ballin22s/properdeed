@@ -1,11 +1,37 @@
 {
   "expo": {
-    "name": "properdeed",
+    "name": "Properdeed",
     "slug": "properdeed",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/appstore.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFC00"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "net.topnetworth.properdeed",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/playstore.png",
+        "backgroundColor": "#FFFC00"
+      },
+      "package": "net.topnetworth.properdeed",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   },
-  "name": "properdeed"
+  "name": "Properdeed"
 }
