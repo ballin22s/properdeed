@@ -120,8 +120,11 @@ const deleteVendor = dispatch => async ({ vendorID }) => {
 };
 
 const fetchVendors = dispatch => async({ state }) => {
+  const user = await AsyncStorage.getItem('user');
+  const user_id = JSON.parse(user)[1][1];
   const name = state.params.name;
-  const response = await trackerApi.get(`/vendors?tag=${name}`);
+
+  const response = await trackerApi.get(`/vendors?user_id=${user_id}&tag=${name}`);
   dispatch({ type: 'fetch_vendors', payload: response.data });
 };
 

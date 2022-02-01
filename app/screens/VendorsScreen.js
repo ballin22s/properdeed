@@ -73,7 +73,7 @@ const VendorsScreen = ({ navigation }) => {
 };
 
 VendorsScreen.navigationOptions = ({ navigation }) => ({
-  title: 'Vendors',
+  title: navigation.getParam('name'),
   headerRight: () => (
     <FontAwesome
       onPress={() => navigation.navigate('VendorForm', navigation.state.params)}
