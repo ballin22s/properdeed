@@ -24,7 +24,7 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
 
-const createVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, city, zip, stateValue, service }) => {
+const createVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, website, note, city, zip, stateValue, service }) => {
   const user = await AsyncStorage.getItem('user');
   const user_id = JSON.parse(user)[1][1];
   
@@ -38,7 +38,9 @@ const createVendor = dispatch => async ({ vendorID, companyName, firstName, last
           first_name: firstName,
           last_name: lastName,
           phone: phone,
-          email: email, 
+          email: email,
+          website: website,
+          note: note,
           all_services: service,
           vendor_address_attributes: {
             state_id: stateValue,
@@ -61,7 +63,7 @@ const createVendor = dispatch => async ({ vendorID, companyName, firstName, last
   }
 };
 
-const updateVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, city, zip, stateValue, service }) => {
+const updateVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, website, note, city, zip, stateValue, service }) => {
   const user = await AsyncStorage.getItem('user');
   const user_id = JSON.parse(user)[1][1];
   
@@ -75,7 +77,9 @@ const updateVendor = dispatch => async ({ vendorID, companyName, firstName, last
           first_name: firstName,
           last_name: lastName,
           phone: phone,
-          email: email, 
+          email: email,
+          website: website,
+          note: note,
           all_services: service,
           vendor_address_attributes: {
             state_id: stateValue,

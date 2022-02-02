@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "net.topnetworth.properdeed",
-      "buildNumber": "1.0.1",
+      "buildNumber": "1.0.2",
       "infoPlist": {
         "UIRequiresFullScreen": true
       }
@@ -30,7 +30,8 @@
         "backgroundColor": "#FFFC00"
       },
       "package": "net.topnetworth.properdeed",
-      "versionCode": 2
+      "versionCode": 2,
+      "versionName" "2.0.2"
     },
     "web": {
       "favicon": "./assets/favicon.png"

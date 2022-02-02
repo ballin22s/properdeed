@@ -14,6 +14,8 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
   const [lastName, setLastName] = useState(vendor ? vendor.last_name : '');
   const [phone, setPhone] = useState(vendor ? vendor.phone : '');
   const [email, setEmail] = useState(vendor ? vendor.email : '');
+  const [website, setWebsite] = useState(vendor ? vendor.website : '');
+  const [note, setNote] = useState(vendor ? vendor.note : '');
   const [zip, setZip] = useState(vendor?.vendor_address ? vendor.vendor_address.zip : '');
   const [city, setCity] = useState(vendor?.vendor_address ? vendor.vendor_address.city : '');
     
@@ -113,6 +115,19 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
         autoCorrect={false}
       />
       <Input
+        placeholder="Website"
+        value={website}
+        onChangeText={setWebsite}
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+      <Input
+        placeholder="Note"
+        value={note}
+        onChangeText={setNote}
+        autoCorrect={false}
+      />
+      <Input
         placeholder="City"
         value={city}
         onChangeText={setCity}
@@ -151,6 +166,8 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
             lastName,
             phone,
             email,
+            website,
+            note,
             city,
             zip,
             stateValue,
