@@ -30,8 +30,7 @@
         "backgroundColor": "#FFFC00"
       },
       "package": "net.topnetworth.properdeed",
-      "versionCode": 2,
-      "versionName" "2.0.2"
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
