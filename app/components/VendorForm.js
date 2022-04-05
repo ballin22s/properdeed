@@ -4,10 +4,12 @@ import { Text, Button, View, Input, Picker } from 'react-native-elements';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Spacer from '../components/Spacer';
 
+import PhoneInput from 'react-phone-number-input/react-native-input'
+
 import { withNavigation } from 'react-navigation';
 
 const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonText, navigation }) => {
-  
+
   const [vendorID, setVendorID] = useState(vendor ? vendor.id : null);
   const [companyName, setCompanyName] = useState(vendor ? vendor.company_name : '');
   const [firstName, setFirstName] = useState(vendor ? vendor.first_name : '');
@@ -18,10 +20,10 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
   const [note, setNote] = useState(vendor ? vendor.note : '');
   const [zip, setZip] = useState(vendor?.vendor_address ? vendor.vendor_address.zip : '');
   const [city, setCity] = useState(vendor?.vendor_address ? vendor.vendor_address.city : '');
-    
+
   const [open1, setStateOpen] = useState(false);
   const [stateValue, setValue] = useState(vendor?.vendor_address ? vendor.vendor_address.state_id : null);
-    
+
   const [usStates, setUsStates] = useState([
     { value: 2, label: "Alabama" },
     { value: 1, label: "Alaska" },
@@ -75,9 +77,9 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
     { value: 49, label: "Wisconsin" },
     { value: 51, label: "Wyoming" },
   ]);
-  
+
   const [service, setService] = useState(serviceName);
-  
+
   return (
     <>
       <Spacer/>
@@ -99,12 +101,13 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
         onChangeText={setLastName}
         autoCorrect={false}
       />
-      <Input
+      <PhoneInput
+        style={styles.phone}
         placeholder="Phone"
+        placeholderTextColor="gray"
+        defaultCountry="US"
         value={phone}
-        onChangeText={setPhone}
-        keyboardType={'phone-pad'}
-        autoCorrect={false}
+        onChange={setPhone}
       />
       <Input
         placeholder="Email"
@@ -156,8 +159,8 @@ const VendorForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
       />
       { {errorMessage} ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null }
       <Spacer>
-        <Button 
-        title={submitButtonText} 
+        <Button
+        title={submitButtonText}
         onPress={
           () => onSubmit({
             vendorID,
@@ -185,6 +188,16 @@ const styles = StyleSheet.create({
     color: 'red',
     marginLeft: 10,
     marginBottom: 5
+  },
+  phone: {
+    fontSize: 18,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 20,
+    paddingBottom: 7,
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray',
+    marginTop: 10
   }
 });
 

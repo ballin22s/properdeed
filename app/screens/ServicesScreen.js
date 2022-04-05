@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { 
+import {
   StyleSheet,
   Text,
   ScrollView,
@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ImageBackground 
+  ImageBackground
 } from 'react-native';
 
 import { NavigationEvents, withNavigationFocus } from 'react-navigation';
@@ -25,7 +25,7 @@ const image = { uri: "https://docs.expo.dev/static/images/tutorial/splash.png" }
 const ServicesScreen = ({ navigation }) => {
   const { state, fetchServices } = useContext(ServiceContext);
 
-  return (    
+  return (
     <>
     <NavigationEvents onWillFocus={fetchServices} />
      <ScrollView>

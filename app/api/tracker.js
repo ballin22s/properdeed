@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
-const url = (__DEV__ ? 'http://192.168.1.200:5000/api/v1/' : 'https://properdeed-api.herokuapp.com/api/v1/');
+const url = (__DEV__ ? 'http://192.168.0.222:5000/api/v1/' : 'https://properdeed-api.herokuapp.com/api/v1/');
 
 const instance = axios.create({
   baseURL: url
@@ -10,8 +10,8 @@ const instance = axios.create({
 instance.interceptors.request.use(
   async (config) => {
     const user = await AsyncStorage.getItem('user');
-    const token = (user !== null ? JSON.parse(user)[0][1] : null);    
-    
+    const token = (user !== null ? JSON.parse(user)[0][1] : null);
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
