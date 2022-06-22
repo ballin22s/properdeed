@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -33,11 +34,39 @@ const propertyNavigation = createStackNavigator({
   Logout: LogoutScreen
 });
 
-const TabNavigator = createBottomTabNavigator({
-  Services: appNavigation,
-  Properties: propertyNavigation
-  //Calculators: CalculatorsScreen
-});
+const TabNavigator = createBottomTabNavigator(
+  {
+    Services: appNavigation,
+    Properties: propertyNavigation
+    //Calculators: CalculatorsScreen
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+
+        let iconName;
+        if (routeName === 'Services') {
+          iconName = focused
+            ? 'ios-information-circle'
+            : 'ios-information-circle-outline';
+          // Sometimes we want to add badges to some icons.
+          // You can check the implementation below.
+          iconName = `body${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Properties') {
+          iconName = `home${focused ? '' : '-outline'}`;
+        }
+
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray'
+    },
+  }
+);
 
 appNavigation.navigationOptions = {
   title: 'Services'

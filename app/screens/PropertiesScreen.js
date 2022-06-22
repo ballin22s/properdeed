@@ -190,7 +190,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     color: '#0077cc',
-    marginTop: 5
+    marginTop: 5,
+    color: 'red'
   },
   button: {
     marginTop: 10,
