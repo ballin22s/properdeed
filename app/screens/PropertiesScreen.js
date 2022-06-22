@@ -22,7 +22,70 @@ const windowHeight = Dimensions.get('window').height;
 
 const PropertiesScreen = ({ navigation }) => {
   const { state, fetchProperties, clearErrorMessage } = useContext(PropertyContext);
-  console.log(state);
+
+  const property_types = ["Apartment", "Single Family Residence", "Condominium", "Townhouse", "Mobile/Manufactured Home"]
+  
+  const states = [
+    { id: 2, label: "Alabama" },
+    { id: 1, label: "Alaska" },
+    { id: 4, label: "Arizona" },
+    { id: 3, label: "Arkansas" },
+    { id: 5, label: "California" },
+    { id: 6, label: "Colorado" },
+    { id: 7, label: "Connecticut" },
+    { id: 9, label: "Delaware" },
+    { id: 8, label: "District of Columbia" },
+    { id: 10, label: "Florida" },
+    { id: 11, label: "Georgia" },
+    { id: 12, label: "Hawaii" },
+    { id: 14, label: "Idaho" },
+    { id: 15, label: "Illinois" },
+    { id: 16, label: "Indiana" },
+    { id: 13, label: "Iowa" },
+    { id: 17, label: "Kansas" },
+    { id: 18, label: "Kentucky" },
+    { id: 19, label: "Louisiana" },
+    { id: 22, label: "Maine" },
+    { id: 21, label: "Maryland" },
+    { id: 20, label: "Massachusetts" },
+    { id: 23, label: "Michigan" },
+    { id: 24, label: "Minnesota" },
+    { id: 26, label: "Mississippi" },
+    { id: 25, label: "Missouri" },
+    { id: 27, label: "Montana" },
+    { id: 30, label: "Nebraska" },
+    { id: 34, label: "Nevada" },
+    { id: 31, label: "New Hampshire" },
+    { id: 32, label: "New Jersey" },
+    { id: 33, label: "New Mexico" },
+    { id: 35, label: "New York" },
+    { id: 28, label: "North Carolina" },
+    { id: 29, label: "North Dakota" },
+    { id: 36, label: "Ohio" },
+    { id: 37, label: "Oklahoma" },
+    { id: 38, label: "Oregon" },
+    { id: 39, label: "Pennsylvania" },
+    { id: 40, label: "Rhode Island" },
+    { id: 41, label: "South Carolina" },
+    { id: 42, label: "South Dakota" },
+    { id: 43, label: "Tennessee" },
+    { id: 44, label: "Texas" },
+    { id: 45, label: "Utah" },
+    { id: 47, label: "Vermont" },
+    { id: 46, label: "Virginia" },
+    { id: 48, label: "Washington" },
+    { id: 50, label: "West Virginia" },
+    { id: 49, label: "Wisconsin" },
+    { id: 51, label: "Wyoming" },
+  ]
+  
+  const state_abbr = (ID) => {
+    var found = states.find(obj => {
+      return obj.id === ID;
+    });
+    return found.label;
+  }
+  
   return (
     <>
     <NavigationEvents onWillFocus={fetchProperties} />    
@@ -37,18 +100,18 @@ const PropertiesScreen = ({ navigation }) => {
                 size={20}
                 style={{ textAlign: "right", marginRight: 25 }}
               />
-              <Text style={styles.company_name}>
-                {property.investment_type}  
-              </Text>
-              <Text style={styles.company_name}>
+              <Text style={styles.name}>
                 {property.name}  
+              </Text> 
+              <Text style={styles.property_type}>
+                {property_types[property.property_type-1]}
               </Text>
-              <Text style={styles.company_name}>
-                {property.property_type}  
-              </Text>
-              <Text style={styles.company_name}>
-                {property.property_address.street1} {property.property_address.street2}
-                {property.property_address.city} {property.property_address.state_id} {property.property_address.zip}
+              <Text style={styles.property_type}>
+                {property.investment_type == 1 ? 'Long-Term Rentals' : 'Short-Term Rentals'}  
+              </Text>  
+              <Text style={styles.text}>
+                {property.property_address.street1} {property.property_address.street2} {'\n'} 
+                {property.property_address.city} {state_abbr(property.property_address.state_id)} {property.property_address.zip}
               </Text>
             </View>
           );
@@ -108,7 +171,7 @@ const styles = StyleSheet.create({
 
     elevation: 3,
   },
-  company_name: {
+  property_type: {
     color: 'gray',
     fontSize: 15,
     fontWeight: "bold",
@@ -121,11 +184,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: 'center',
     marginBottom: 5,
+    marginTop: 5,
   },
   text: {
     textAlign: 'center',
     fontSize: 18,
     color: '#0077cc',
+    marginTop: 5
   },
   button: {
     marginTop: 10,
