@@ -5,13 +5,13 @@ import Spacer from '../components/Spacer';
 
 import { withNavigation } from 'react-navigation';
 
-const DeleteForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonText, navigation }) => {
-  
-  const [vendorID, setVendorID] = useState(vendor ? vendor.id : null);
+const DeleteForm = ({ errorMessage, onSubmit, serviceName, deleteObject, submitButtonText, navigation }) => {
 
-  const deleteAlert = (vendorID) =>  
+  const [ID, setID] = useState(deleteObject ? deleteObject.id : null);
+
+  const deleteAlert = (ID) =>  
     Alert.alert(
-      "Do you want to delete this vendor?",
+      "Do you want to delete this?",
       "You cannot undo this action",
       [
         {
@@ -21,7 +21,7 @@ const DeleteForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
         },
         { 
           text: "Delete",
-          onPress: () => onSubmit({vendorID}),
+          onPress: () => onSubmit({ID}),
           style: "destructive"
         }
       ]
@@ -31,8 +31,8 @@ const DeleteForm = ({ errorMessage, onSubmit, serviceName, vendor, submitButtonT
     <>
       <Spacer>
         <TouchableOpacity
-          style={vendor ? styles.button : styles.hidden }
-          onPress={() => deleteAlert(vendorID)}   
+          style={deleteObject ? styles.button : styles.hidden }
+          onPress={() => deleteAlert(ID)}   
         >
           <Text style={styles.text}>Delete</Text>
         </TouchableOpacity>

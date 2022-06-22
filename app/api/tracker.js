@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
-const url = (__DEV__ ? 'http://192.168.0.222:5000/api/v1/' : 'https://properdeed-api.herokuapp.com/api/v1/');
+const url = (__DEV__ ? 'http://192.168.0.9:5000/api/v1/' : 'https://properdeed-api.herokuapp.com/api/v1/');
 
 const instance = axios.create({
   baseURL: url

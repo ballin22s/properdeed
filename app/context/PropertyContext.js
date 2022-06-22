@@ -3,17 +3,17 @@ import createDataContext from './createDataContext';
 import trackerApi from '../api/tracker';
 import { navigate } from '../navigationRef';
 
-const vendorReducer = (state, action) => {
+const propertyReducer = (state, action) => {
   switch (action.type) {
-    case 'fetch_vendors':
+    case 'fetch_properties':
       return action.payload;
     case 'fetch_states':
       return action.payload;
-    case 'createVendor':
+    case 'createProperty':
       return { errorMessage: '', token: action.payload }
-    case 'updateVendor':
+    case 'updateProperty':
       return { errorMessage: '', token: action.payload }
-    case 'deleteVendor':
+    case 'deleteProperty':
       return { errorMessage: '', token: action.payload }
     default:
       return state;
@@ -24,35 +24,33 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
 
-const createVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, website, note, city, zip, stateValue, service }) => {
+const createProperty = dispatch => async ({ propertyID, propertyTypeValue, investmentTypeValue, propertyName, multiUnit, street1, street2, city, zip, stateValue }) => {
   const user = await AsyncStorage.getItem('user');
   const user_id = JSON.parse(user)[1][1];
 
   try {
     const response = await trackerApi.post(
-      'vendors',
+      'properties',
       {
-        vendor: {
+        property: {
           user_id: user_id,
-          company_name: companyName,
-          first_name: firstName,
-          last_name: lastName,
-          phone: phone,
-          email: email,
-          website: website,
-          note: note,
-          all_services: service,
-          vendor_address_attributes: {
+          property_type: propertyTypeValue,
+          investment_type: investmentTypeValue,
+          name: propertyName,
+          multi_unit: multiUnit,
+          property_address_attributes: {
             state_id: stateValue,
             zip: zip,
-            city: city
+            city: city,
+            street1: street1,
+            street2: street2
           }
         }
       }
     );
 
     console.log(response);
-    navigate('Vendors')
+    navigate('Properties')
 
   } catch (err) {
     console.log(err);
@@ -63,35 +61,33 @@ const createVendor = dispatch => async ({ vendorID, companyName, firstName, last
   }
 };
 
-const updateVendor = dispatch => async ({ vendorID, companyName, firstName, lastName, phone, email, website, note, city, zip, stateValue, service }) => {
+const updateProperty = dispatch => async ({ propertyID, propertyTypeValue, investmentTypeValue, propertyName, multiUnit, street1, street2, city, zip, stateValue }) => {
   const user = await AsyncStorage.getItem('user');
   const user_id = JSON.parse(user)[1][1];
 
   try {
     const response = await trackerApi.put(
-      `/vendors/${vendorID}`,
+      `/properties/${propertyID}`,
       {
-        vendor: {
+        property: {
           user_id: user_id,
-          company_name: companyName,
-          first_name: firstName,
-          last_name: lastName,
-          phone: phone,
-          email: email,
-          website: website,
-          note: note,
-          all_services: service,
-          vendor_address_attributes: {
+          property_type: propertyTypeValue,
+          investment_type: investmentTypeValue,
+          name: propertyName,
+          multi_unit: multiUnit,
+          property_address_attributes: {
             state_id: stateValue,
             zip: zip,
-            city: city
+            city: city,
+            street1: street1,
+            street2: street2
           }
         }
       }
     );
 
     console.log(response.status);
-    navigate('Vendors')
+    navigate('Properties')
 
   } catch (err) {
     console.log(err);
@@ -102,17 +98,17 @@ const updateVendor = dispatch => async ({ vendorID, companyName, firstName, last
   }
 };
 
-const deleteVendor = dispatch => async ({ ID }) => {
+const deleteProperty = dispatch => async ({ ID }) => {
   const user = await AsyncStorage.getItem('user');
   const user_id = JSON.parse(user)[1][1];
 
   try {
     const response = await trackerApi.delete(
-      `/vendors/${ID}`
+      `/properties/${ID}`
     );
 
     console.log(response);
-    navigate('Vendors')
+    navigate('Properties')
 
   } catch (err) {
     console.log(err);
@@ -123,13 +119,12 @@ const deleteVendor = dispatch => async ({ ID }) => {
   }
 };
 
-const fetchVendors = dispatch => async({ state }) => {
+const fetchProperties = dispatch => async() => {
   const user = await AsyncStorage.getItem('user');
   const user_id = JSON.parse(user)[1][1];
-  const name = state.params.name;
 
-  const response = await trackerApi.get(`/vendors?user_id=${user_id}&tag=${name}`);
-  dispatch({ type: 'fetch_vendors', payload: response.data });
+  const response = await trackerApi.get(`/properties?user_id=${user_id}`);
+  dispatch({ type: 'fetch_properties', payload: response.data });
 };
 
 const fetchStates = dispatch => async() => {
@@ -138,7 +133,7 @@ const fetchStates = dispatch => async() => {
 };
 
 export const { Provider, Context } = createDataContext(
-  vendorReducer,
-  { fetchVendors, fetchStates, createVendor, updateVendor, deleteVendor, clearErrorMessage },
+  propertyReducer,
+  { fetchProperties, fetchStates, createProperty, updateProperty, deleteProperty, clearErrorMessage },
   []
 );

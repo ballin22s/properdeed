@@ -3,34 +3,31 @@ import React, { useContext, useState } from 'react';
 import { View, StyleSheet, ScrollView, Text, Alert } from 'react-native';
 import { NavigationEvents, withNavigationFocus } from 'react-navigation';
 
-import { Context as VendorContext } from '../context/VendorContext';
-import VendorForm from '../components/VendorForm';
+import { Context as PropertyContext } from '../context/PropertyContext';
+import PropertyForm from '../components/PropertyForm';
 import DeleteForm from '../components/DeleteForm';
 
 import { FontAwesome } from '@expo/vector-icons';
 
-const VendorFormScreen = ({ navigation, onSubmit }) => {
-  const { state, createVendor, updateVendor, deleteVendor, clearErrorMessage } = useContext(VendorContext);
+const PropertyFormScreen = ({ navigation, onSubmit }) => {
+  const { state, createProperty, updateProperty, deleteProperty, clearErrorMessage } = useContext(PropertyContext);
 
-  const service = navigation.getParam('name');
-  const vendor = navigation.getParam('vendor');
+  const property = navigation.getParam('property');
 
   return (
     <ScrollView>
       <View style={styles.container}>
         <NavigationEvents onWillFocus={ clearErrorMessage }/>
-        <VendorForm
+        <PropertyForm
           errorMessage={state.errorMessage}
-          onSubmit={vendor ? updateVendor : createVendor}
-          serviceName={service}
-          vendor={vendor}
-          submitButtonText={vendor ? "Update Vendor" : "Create Vendor"}
+          onSubmit={property ? updateProperty : createProperty}
+          property={property}
+          submitButtonText={property ? "Update Property" : "Create Property"}
         />
         <DeleteForm
           errorMessage={state.errorMessage}
-          onSubmit={deleteVendor}
-          serviceName={service}
-          deleteObject={vendor}
+          onSubmit={deleteProperty}
+          deleteObject={property}
           submitButtonText={"Delete"}
         />
       </View>
@@ -38,14 +35,14 @@ const VendorFormScreen = ({ navigation, onSubmit }) => {
   );
 };
 
-VendorFormScreen.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('vendor') ? "Edit" : "Create"
+PropertyFormScreen.navigationOptions = ({ navigation }) => ({
+  title: navigation.getParam('property') ? "Edit" : "Create"
   //headerRight: navigation.getParam('vendor') ? <FontAwesome onPress={deleteAlert} name="trash" size={20} style={{ marginRight: 10 }} />  : null,
 });
 
 const deleteAlert = ({ navigation, onSubmit }) => {
   Alert.alert(
-    "Do you want to delete this vendor?",
+    "Do you want to delete this property?",
     "You cannot undo this action",
     [
       {
@@ -73,4 +70,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default VendorFormScreen;
+export default PropertyFormScreen;

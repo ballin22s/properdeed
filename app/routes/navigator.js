@@ -13,6 +13,11 @@ import ServicesScreen from '../screens/ServicesScreen';
 import VendorsScreen from '../screens/VendorsScreen';
 import VendorFormScreen from '../screens/VendorFormScreen';
 
+import PropertiesScreen from '../screens/PropertiesScreen';
+import PropertyFormScreen from '../screens/PropertyFormScreen';
+
+import CalculatorsScreen from '../screens/CalculatorsScreen';
+
 import { FontAwesome } from '@expo/vector-icons';
 
 const appNavigation = createStackNavigator({
@@ -20,6 +25,18 @@ const appNavigation = createStackNavigator({
   Logout: LogoutScreen,
   Vendors: VendorsScreen,
   VendorForm: VendorFormScreen  
+});
+
+const propertyNavigation = createStackNavigator({
+  Properties: PropertiesScreen,
+  PropertyForm: PropertyFormScreen,
+  Logout: LogoutScreen
+});
+
+const TabNavigator = createBottomTabNavigator({
+  Services: appNavigation,
+  Properties: propertyNavigation
+  //Calculators: CalculatorsScreen
 });
 
 appNavigation.navigationOptions = {
@@ -32,7 +49,7 @@ const switchNavigator = createSwitchNavigator ({
     Login: LoginScreen,
     Signup: SignupScreen
   }),
-  appNavigation: appNavigation,
+  TabNavigator: TabNavigator
 });
 
 export default createAppContainer(switchNavigator);
